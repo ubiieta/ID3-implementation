@@ -9,7 +9,7 @@
 import pandas as pd 
 import numpy as np
 
-data = pd.read_csv("03_a_tree_dataset .csv")
+data = pd.read_csv("ML-algorithms\datasetID3.csv")
 data.rename(columns= {"rain" : "Outlook", "normal" : "Humidity", "strong" : "Wind", "yes" : "PlayTennis"},  inplace=True)
 
  
@@ -163,3 +163,4 @@ def predict(tree, sample):
 
 
 print(predict(ID3(data,["Outlook","Humidity","Wind"], "PlayTennis"), {"Outlook": "rain", "Humidity": "high", "Wind" : "weak"}))
+
