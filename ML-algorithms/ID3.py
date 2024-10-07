@@ -123,7 +123,7 @@ def choose_best_attribute(data, attributes, target_attribute):
     return max(gains, key=gains.get)  # Attribute with highest gain
 
 
-def ID3(data, attributes, target_attribute):
+def build_tree(data, attributes, target_attribute):
     # Base case: If all examples have the same label, create a leaf node
     labels = data[target_attribute].unique()
     if len(labels) == 1:
@@ -151,7 +151,7 @@ def ID3(data, attributes, target_attribute):
         else:
             # Remove the current attribute and recurse for child nodes
             new_attributes = [attr for attr in attributes if attr != best_attribute]
-            child_node = ID3(subset, new_attributes, target_attribute)
+            child_node = build_tree(subset, new_attributes, target_attribute)
             root.add_child(value, child_node)
     
     return root
@@ -162,5 +162,5 @@ def predict(tree, sample):
     return tree.predict(sample)
 
 
-print(predict(ID3(data,["Outlook","Humidity","Wind"], "PlayTennis"), {"Outlook": "rain", "Humidity": "high", "Wind" : "weak"}))
+print(predict(build_tree(data,["Outlook","Humidity","Wind"], "PlayTennis"), {"Outlook": "rain", "Humidity": "high", "Wind" : "weak"}))
 
